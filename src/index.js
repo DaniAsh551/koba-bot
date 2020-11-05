@@ -85,3 +85,12 @@ const token =
     .replace("TOKEN=", "");
 
 client.login(token);
+
+//expose web endpoint if on production
+if (!!process.env.NODE_ENV) {
+  const express = require("express");
+  const app = express();
+  app.get("/", (req, res) => res.send("Bot is running"));
+
+  app.listen(80, () => console.log("Started web endpoint"));
+}

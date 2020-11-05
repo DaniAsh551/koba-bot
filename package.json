@@ -4,13 +4,14 @@
   "description": "Koba Bois discord bot",
   "main": "src/index.js",
   "scripts": {
-    "start": "node .",
-    "deploy": "NODE_ENV=production node --optimize_for_size --max_old_space_size=460 --gc_interval=100 .",
+    "debug": "node .",
+    "start": "NODE_ENV=production node --optimize_for_size --max_old_space_size=460 --gc_interval=100 .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "d4n1551",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "discord.js": "^12.4.1",
+    "express": "^4.17.1"
   }
 }
