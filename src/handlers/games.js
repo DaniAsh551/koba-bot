@@ -8,7 +8,7 @@ const KEY = "games";
 async function games({ args, message, config }) {
   let games = config.play.games;
   let game_help = games
-    .map((g) => `${g.name}:  Tags '${g.tags.join(", ")}' supported.`)
+    .map((g) => `\n${g.name}:  Tags '${g.tags.join(", ")}' supported.`)
     .join("\n");
   return `Hi <@${message.member.user.id}> - The list of games we officialy support as of now:
   ${game_help}
