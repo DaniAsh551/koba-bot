@@ -92,5 +92,7 @@ if (!!process.env.NODE_ENV) {
   const app = express();
   app.get("/", (req, res) => res.send("Bot is running"));
 
-  app.listen(80, () => console.log("Started web endpoint"));
+  app.listen(process.env.PORT || 3000, () =>
+    console.log("Started web endpoint")
+  );
 }
