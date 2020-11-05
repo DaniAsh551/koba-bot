@@ -1,5 +1,5 @@
-# koba-bot
-Koba Bois discord bot
+# ![koba-bot](/src/avatar.png)
+## Koba Bois discord bot
 This is a bot by which we aim to eliminate the need for all or most of the other bots in our discord server.
 
 
