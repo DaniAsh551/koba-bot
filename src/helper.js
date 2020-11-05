@@ -64,3 +64,5 @@ function getUserProp(user, prop) {
       return user[prop];
   }
 }
+
+module.exports.getUserProp = getUserProp;

@@ -9,7 +9,26 @@
                     "apex",
                     "al"
                 ],
-                "role": "<@&710163676132278322>"
+                "role": "<@&710163676132278322>",
+                "channels": {
+                    "whitelist": [
+                        "chat-apex"
+                    ],
+                    "blacklist": []
+                }
+            },
+            {
+                "name": "Deceit",
+                "tags": [
+                    "deceit"
+                ],
+                "role": "<@&753730045058482248>",
+                "channels": {
+                    "whitelist": [
+                        "chat-deceit"
+                    ],
+                    "blacklist": []
+                }
             },
             {
                 "name": "Hyper Scape",
@@ -17,14 +36,13 @@
                     "hyper scape",
                     "hs"
                 ],
-                "role": "<@&732160046154383411>"
-            },
-            {
-                "name": "Deceit",
-                "tags": [
-                    "deceit"
-                ],
-                "role": "<@&753730045058482248>"
+                "role": "<@&732160046154383411>",
+                "channels": {
+                    "whitelist": [
+                        "chat"
+                    ],
+                    "blacklist": []
+                }
             },
             {
                 "name": "Monster Hunter",
@@ -32,7 +50,13 @@
                     "monster hunter",
                     "mh"
                 ],
-                "role": "<@&757976357564055565>"
+                "role": "<@&757976357564055565>",
+                "channels": {
+                    "whitelist": [
+                        "chat"
+                    ],
+                    "blacklist": []
+                }
             },
             {
                 "name": "CS Go",
@@ -44,7 +68,13 @@
                     "counter strike",
                     "counter-strike"
                 ],
-                "role": "CS GO"
+                "role": "CS GO",
+                "channels": {
+                    "whitelist": [
+                        "chat"
+                    ],
+                    "blacklist": []
+                }
             },
             {
                 "name": "GTA V",
@@ -53,7 +83,13 @@
                     "gtav",
                     "gta5"
                 ],
-                "role": "GTA V"
+                "role": "GTA V",
+                "channels": {
+                    "whitelist": [
+                        "chat"
+                    ],
+                    "blacklist": []
+                }
             }
         ],
         "messages": [
