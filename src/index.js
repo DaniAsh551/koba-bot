@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const handlers = require("./handlers");
 const handlerKeys = Object.keys(handlers);
 const { getJoke } = require("./helper");
-const config = require("./config.json");
+const config = require("./config/app.json");
 //bot client
 const client = new Discord.Client();
 
