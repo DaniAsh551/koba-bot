@@ -10,7 +10,7 @@ const client = new Discord.Client();
 //set a joke as activity
 const setActivity = () => client.user.setActivity(getJoke());
 //set a new joke every 12 hrs
-setInterval(setActivity, 43200);
+setInterval(setActivity, 43200000);
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
