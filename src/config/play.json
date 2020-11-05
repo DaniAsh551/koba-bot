@@ -1,0 +1,105 @@
+{
+    "games": [
+        {
+            "name": "Apex Legends",
+            "tags": [
+                "apex legends",
+                "apex",
+                "al"
+            ],
+            "role": "<@&710163676132278322>",
+            "channels": {
+                "whitelist": [
+                    "chat-apex"
+                ],
+                "blacklist": []
+            }
+        },
+        {
+            "name": "Deceit",
+            "tags": [
+                "deceit"
+            ],
+            "role": "<@&753730045058482248>",
+            "channels": {
+                "whitelist": [
+                    "chat-deceit"
+                ],
+                "blacklist": []
+            }
+        },
+        {
+            "name": "Hyper Scape",
+            "tags": [
+                "hyper scape",
+                "hs"
+            ],
+            "role": "<@&732160046154383411>",
+            "channels": {
+                "whitelist": [
+                    "chat"
+                ],
+                "blacklist": []
+            }
+        },
+        {
+            "name": "Monster Hunter",
+            "tags": [
+                "monster hunter",
+                "mh"
+            ],
+            "role": "<@&757976357564055565>",
+            "channels": {
+                "whitelist": [
+                    "chat"
+                ],
+                "blacklist": []
+            }
+        },
+        {
+            "name": "CS Go",
+            "tags": [
+                "cs",
+                "csgo",
+                "cs go",
+                "counterstrike",
+                "counter strike",
+                "counter-strike"
+            ],
+            "role": "CS GO",
+            "channels": {
+                "whitelist": [
+                    "chat"
+                ],
+                "blacklist": []
+            }
+        },
+        {
+            "name": "GTA V",
+            "tags": [
+                "gta",
+                "gtav",
+                "gta5"
+            ],
+            "role": "GTA V",
+            "channels": {
+                "whitelist": [
+                    "chat"
+                ],
+                "blacklist": []
+            }
+        }
+    ],
+    "messages": [
+        "{user.mention} summons you for a game of {role}!",
+        "{user.mention} is feeling lonely! You wanna join {user.name}  for {role}?",
+        "{role} anyone?",
+        "How about a game of {role} with {user.mention}??",
+        "Bois, {role}?",
+        "{role} bois?",
+        "{user.mention} is feelin froggy for a game of {role}, wanna join?",
+        "{role}, how about a game?",
+        "Any of y'all at {role} wanna play with {user.mention}?",
+        "Hey {role} people! Wanna go Apexxing with {user.mention}?"
+    ]
+}

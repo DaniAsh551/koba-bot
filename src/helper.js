@@ -1,5 +1,6 @@
 const { User } = require("discord.js");
-const config = require("./config.json");
+const jokes = require("./config/jokes.json");
+const playConfig = require("./config/play.json");
 
 const userPropRegex = /({user\.([^}]*))(})/gm;
 
@@ -8,7 +9,7 @@ const userPropRegex = /({user\.([^}]*))(})/gm;
  * @param {{ role:string, user:User }}} param0
  */
 module.exports.buildPlayMessage = function ({ role, user }) {
-  let message = getRandom(config.play.messages);
+  let message = getRandom(playConfig.messages);
   message = replaceAll(message, "{role}", role);
 
   let userProps = message.match(userPropRegex);
@@ -27,7 +28,7 @@ module.exports.buildPlayMessage = function ({ role, user }) {
 /**
  * Gets a random joke from the config.
  */
-module.exports.getJoke = () => getRandom(config.jokes);
+module.exports.getJoke = () => getRandom(jokes);
 
 /**
  * Returns a random element of the given array

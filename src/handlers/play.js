@@ -1,5 +1,6 @@
 const { Message } = require("discord.js");
 const { buildPlayMessage, getUserProp } = require("../helper");
+const playConfig = require("../config/play.json");
 const KEY = "play";
 
 const help = () => "Type 'play [game]'\n ex: '/play apex'";
@@ -14,7 +15,7 @@ async function play({ args, message, config }) {
 
   let channelName = message.channel.name.toLocaleLowerCase();
 
-  let game = config.play.games.filter((game) =>
+  let game = playConfig.games.filter((game) =>
     game.tags.includes(requestedGame)
   );
   if (!game || game.length < 1) return help();
