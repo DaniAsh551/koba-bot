@@ -2,7 +2,7 @@ const { Message } = require("discord.js");
 const KEY = "games";
 
 /**
- *
+ * Spits out the list of supported games.
  * @param {{ args:string[], message:Message, config:any }} param0
  */
 async function games({ args, message, config }) {
