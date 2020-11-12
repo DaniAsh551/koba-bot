@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.4.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jimp": "^0.16.1",
+    "opencv.js": "^1.2.1"
   }
 }

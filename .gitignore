@@ -1,3 +1,5 @@
 node_modules/
 .env
 yarn.lock
+.env_dbg
+.env_prod
