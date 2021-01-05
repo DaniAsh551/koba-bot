@@ -1,4 +1,14 @@
 {
+    "channel-game-tag-relationships": [
+        {
+            "channel": "chat-apex",
+            "tag": "apex legends"
+        },
+        {
+            "channel": "chat-deceit",
+            "tag": "deceit"
+        }
+    ],
     "games": [
         {
             "name": "Apex Legends",

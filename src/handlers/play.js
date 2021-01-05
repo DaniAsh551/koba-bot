@@ -10,11 +10,20 @@ const help = () => "Type 'play [game]'\n ex: '/play apex'";
  * Serves the play command on the server
  * @param {{ args:string[], message:Message, config:any, client: Client }} param0
  */
-async function play({ args, message, config }) {
-  var requestedGame = args[0].toLocaleLowerCase();
-  if (!requestedGame) return help();
-
+async function play({ args, message, config, client }) {
+  var requestedGame = args && args[0] && args[0].toLocaleLowerCase();
   let channelName = message.channel.name.toLocaleLowerCase();
+
+  if (!requestedGame) {
+    let gameTagChannel = playConfig["channel-game-tag-relationships"].filter(
+      (x) => x.channel === channelName
+    );
+
+    if (gameTagChannel.length < 1) return help();
+
+    requestedGame = gameTagChannel[0].tag;
+    console.log(channelName, requestedGame);
+  }
 
   let game = playConfig.games.filter((game) =>
     game.tags.includes(requestedGame)
