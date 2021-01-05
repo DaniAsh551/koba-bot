@@ -12,8 +12,8 @@ async function games({ args, message, config }) {
     .map((g) => `\n${g.name}:  Tags '${g.tags.join(", ")}' supported.`)
     .join("\n");
   return `Hi <@${message.member.user.id}> - The list of games we officialy support as of now:
-  ${game_help}
-  example: '${config.prefix}play ${games[0].tags[0]}' invites people to a game of ${games[0].name}`;
+  \`\`\`${game_help}\`\`\`
+  example: \`\`\`${config.prefix}play ${games[0].tags[0]}\`\`\` invites people to a game of ${games[0].name}`;
 }
 
 module.exports = createHandler(KEY, games, EVENT_TYPE.MESSAGE);
