@@ -1,13 +1,14 @@
-const { Message } = require("discord.js");
+const { Message, Client } = require("discord.js");
 const { buildPlayMessage, getUserProp } = require("../helper");
 const playConfig = require("../config/play.json");
 const KEY = "play";
+const { createHandler, EVENT_TYPE } = require("../createHandler");
 
 const help = () => "Type 'play [game]'\n ex: '/play apex'";
 
 /**
  * Serves the play command on the server
- * @param {{ args:string[], message:Message, config:any }} param0
+ * @param {{ args:string[], message:Message, config:any, client: Client }} param0
  */
 async function play({ args, message, config }) {
   var requestedGame = args[0].toLocaleLowerCase();
@@ -45,4 +46,4 @@ async function play({ args, message, config }) {
   return playMessage;
 }
 
-module.exports = { KEY, play };
+module.exports = createHandler(KEY, play, EVENT_TYPE.MESSAGE);

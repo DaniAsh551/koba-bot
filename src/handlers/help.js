@@ -1,9 +1,10 @@
-const { Message } = require("discord.js");
+const { Message, Client } = require("discord.js");
 const KEY = "help";
+const { createHandler, EVENT_TYPE } = require("../createHandler");
 
 /**
  *
- * @param {{ args:string[], message:Message, config:any }} param0
+ * @param {{ args:string[], message:Message, config:any, client:Client }} param0
  */
 async function help({ args, message, config }) {
   let { prefix } = config;
@@ -13,4 +14,4 @@ async function help({ args, message, config }) {
   ${prefix}help             -   Displays this help message.`;
 }
 
-module.exports = { KEY, help };
+module.exports = createHandler(KEY, help, EVENT_TYPE.MESSAGE);

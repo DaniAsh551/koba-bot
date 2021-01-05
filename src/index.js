@@ -1,9 +1,9 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const handlers = require("./handlers");
-const handlerKeys = Object.keys(handlers);
 const { getJoke } = require("./helper");
 const config = require("./config/app.json");
+const { EVENT_TYPE } = require("./createHandler");
 //bot client
 const client = new Discord.Client();
 
@@ -64,11 +64,23 @@ client.on("message", async (message) => {
   const command = args.shift().toLowerCase();
 
   // Let's go with a few common example commands! Feel free to delete or change those.
-  if (handlers[command]) {
-    let resp = await handlers[command]({ args, message, config });
+  if (handlers[command] && handlers[command].type === EVENT_TYPE.MESSAGE) {
+    let handler = handlers[command];
+    if (
+      handler.predicate &&
+      !handler.predicate({ args, message, config, client })
+    )
+      return;
+
+    let resp = await handlers[command][command]({
+      args,
+      message,
+      config,
+      client,
+    });
     if (!!resp) await message.channel.send(resp);
   } else {
-    let resp = await handlers.help({ args, message, config });
+    let resp = await handlers.help.help({ args, message, config, client });
     if (!!resp) await message.channel.send(resp);
   }
 });
@@ -87,12 +99,12 @@ const token =
 client.login(token);
 
 //expose web endpoint if on production
-if (!!process.env.NODE_ENV) {
-  const express = require("express");
-  const app = express();
-  app.get("/", (req, res) => res.send("Bot is running"));
+// if (!!process.env.NODE_ENV) {
+//   const express = require("express");
+//   const app = express();
+//   app.get("/", (req, res) => res.send("Bot is running"));
 
-  app.listen(process.env.PORT || 3000, () =>
-    console.log("Started web endpoint")
-  );
-}
+//   app.listen(process.env.PORT || 3000, () =>
+//     console.log("Started web endpoint")
+//   );
+// }

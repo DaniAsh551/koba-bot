@@ -1,9 +1,10 @@
-const { Message } = require("discord.js");
+const { Message, Client } = require("discord.js");
 const KEY = "games";
+const { createHandler, EVENT_TYPE } = require("../createHandler");
 
 /**
  * Spits out the list of supported games.
- * @param {{ args:string[], message:Message, config:any }} param0
+ * @param {{ args:string[], message:Message, config:any, client: Client }} param0
  */
 async function games({ args, message, config }) {
   let games = config.play.games;
@@ -15,4 +16,4 @@ async function games({ args, message, config }) {
   example: '${config.prefix}play ${games[0].tags[0]}' invites people to a game of ${games[0].name}`;
 }
 
-module.exports = { KEY, games };
+module.exports = createHandler(KEY, games, EVENT_TYPE.EVENT);
