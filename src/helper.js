@@ -10,7 +10,7 @@ const userPropRegex = /({user\.([^}]*))(})/gm;
  */
 module.exports.buildPlayMessage = function ({ role, user }) {
   let message = getRandom(playConfig.messages);
-  message = message.replaceAll("{role}", role);
+  message = replaceAll(message, "{role}", role);
 
   let userProps = message.match(userPropRegex);
 
@@ -37,6 +37,17 @@ module.exports.getJoke = () => getRandom(jokes);
 function getRandom(array) {
   let rand = Math.round(Math.random() * (array.length - 1));
   return array[rand];
+}
+
+/**
+ * Replaces all occurences with given string in a source string
+ * @param {string} src
+ * @param {string} needle
+ * @param {string} replace
+ */
+function replaceAll(src, needle, replace) {
+  while (src.includes(needle)) src = src.replace(needle, replace);
+  return src;
 }
 
 /**
