@@ -1,8 +1,9 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const handlers = require("./handlers");
-const { getJoke } = require("./helper");
+const { getJoke, getGuildMemberMessage, assignRoleToUser } = require("./helper");
 const config = require("./config/app.json");
+const guild = require("./config/guild.json");
 const { EVENT_TYPE } = require("./createHandler");
 //bot client
 const client = new Discord.Client();
@@ -18,17 +19,58 @@ client.on("ready", () => {
     `Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`
   );
 
-  setTimeout(
-    () =>
-      client.user.setAvatar(
-        require("fs").readFileSync(__dirname + "/avatar.png")
-      ),
-    5000
-  );
+  // setTimeout(
+  //   () =>
+  //     client.user.setAvatar(
+  //       require("fs").readFileSync(__dirname + "/avatar.png")
+  //     ),
+  //   5000
+  // );
 
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   setActivity();
+});
+
+client.on('guildMemberAdd', member => {
+
+  //when a new member joins the server, this event is triggered
+
+  //get all the default roles from config
+  let roles = guild.defaultRoles;
+  //get the channel (for logging the welcome messages) by channel name
+  const channel = member.guild.channels.cache.find(channel => channel.name === guild.memberWelcomeMessageChannel);
+
+  //if channel does not exist, then return
+  if (!channel) {
+    console.log('Channel not found');
+    return;
+  }
+
+  //assign the default roles to the member
+  assignRoleToUser(roles, member);
+
+  //send the join message to the channel
+  channel.send(getGuildMemberMessage(member, 'joined'));
+
+});
+
+client.on('guildMemberRemove', member => {
+
+  //when a member leaves the server, this event is triggered
+
+  //get the channel (for logging the leave messages) by channel name
+  const channel = member.guild.channels.cache.find(channel => channel.name === guild.memberLeaveMessageChannel);
+
+  //if channel does not exist, then return
+  if (!channel) {
+    console.log('Channel not found');
+    return;
+  }
+
+  //send the join message to the channel
+  channel.send(getGuildMemberMessage(member, 'left'));
+
 });
 
 client.on("guildCreate", (guild) => {

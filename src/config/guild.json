@@ -1,0 +1,23 @@
+{
+    "memberWelcomeMessageChannel": "logger",
+    "memberLeaveMessageChannel": "logger",
+    "welcomeMessages": [
+        "Welcome to the server {user.mention}",
+        "Bnjour, {user.mention}. Hope you have a delightful time!"
+    ],
+    "defaultRoles": [
+        {
+            "name": "hello world"
+        },
+        {
+            "name": "for everyone"
+        },
+        {
+            "name": "no exists"
+        }
+    ],
+    "leaveMessages": [
+        "Feels bad. {user.mention} left already?",
+        "Wait what? {user.mention} left?"
+    ]
+}

@@ -1,5 +1,5 @@
 node_modules/
-.env
+src/.env
 yarn.lock
 .env_dbg
 .env_prd
