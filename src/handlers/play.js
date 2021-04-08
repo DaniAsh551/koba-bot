@@ -55,4 +55,9 @@ async function play({ args, message, config, client }) {
   return playMessage;
 }
 
-module.exports = createHandler(KEY, play, EVENT_TYPE.MESSAGE);
+module.exports = createHandler(
+  KEY,
+  play,
+  EVENT_TYPE.MESSAGE,
+  "Serves the play command on the server"
+);

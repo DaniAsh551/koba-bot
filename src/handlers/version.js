@@ -7,8 +7,13 @@ const { version } = require("../../package.json");
  *
  * @param {{ args:string[], message:Message, config:any, client:Client }} param0
  */
-async function help({ args, message, config }) {
+async function versionFunc({ args, message, config }) {
   return `kb-bot version ${version}`;
 }
 
-module.exports = createHandler(KEY, help, EVENT_TYPE.MESSAGE);
+module.exports = createHandler(
+  KEY,
+  versionFunc,
+  EVENT_TYPE.MESSAGE,
+  "Prints the version of the Bot"
+);

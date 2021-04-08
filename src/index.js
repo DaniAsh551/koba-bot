@@ -77,10 +77,17 @@ client.on("message", async (message) => {
       message,
       config,
       client,
+      handlers,
     });
     if (!!resp) await message.channel.send(resp);
   } else {
-    let resp = await handlers.help.help({ args, message, config, client });
+    let resp = await handlers.help.help({
+      args,
+      message,
+      config,
+      client,
+      handlers,
+    });
     if (!!resp) await message.channel.send(resp);
   }
 });

@@ -1,17 +1,36 @@
-const { Message, Client } = require("discord.js");
+const { Message, Client, MessageEmbed } = require("discord.js");
 const KEY = "help";
 const { createHandler, EVENT_TYPE } = require("../createHandler");
+const { getUserProp } = require("../helper");
 
 /**
  *
  * @param {{ args:string[], message:Message, config:any, client:Client }} param0
  */
-async function help({ args, message, config }) {
+async function help({ args, message, config, handlers }) {
   let { prefix } = config;
-  return `Hi <@${message.member.user.id}> - You can use the following command as of now:
-  \`\`\`${prefix}play [game_tag]  -   Invites all people who have subscribed to play a game.
-  ${prefix}games            -   Shows all the games that you can invite people to with the /play command.
-  ${prefix}help             -   Displays this help message.\`\`\``;
+
+  let embed = new MessageEmbed()
+    .setColor("#0099ff")
+    .setTitle(
+      `Hi ${getUserProp(
+        message.member.user,
+        "name"
+      )}, You can use the following command as of now:`
+    );
+
+  let fields = Object.keys(handlers).map((key) => ({
+    name: `${prefix}${handlers[key].KEY}`,
+    value: handlers[key].description,
+  }));
+
+  embed.addFields(fields);
+  return embed;
 }
 
-module.exports = createHandler(KEY, help, EVENT_TYPE.MESSAGE);
+module.exports = createHandler(
+  KEY,
+  help,
+  EVENT_TYPE.MESSAGE,
+  "Displays the help message."
+);

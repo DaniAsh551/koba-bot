@@ -13,15 +13,15 @@ const EVENT_TYPE = {
  * @param {string} key Unique event identifier.
  * @param {({ args:string[], message:Message, config:any, client:Client }) => void} handleAction Event handle action.
  * @param {EVENT_TYPE | string} type
- * @param {(({ args:string[], message:Message, config:any, client:Client }) => boolean) | null} predicate Condition which must be met for the handler to execute.
+ * @param {string} description Description of the handler.
  */
 function createHandler(
   key,
   handleAction,
   type = EVENT_TYPE.MESSAGE,
-  predicate = null
+  description = null
 ) {
-  let val = { KEY: key, predicate, type };
+  let val = { KEY: key, type, description };
   val[key] = handleAction;
   return val;
 }

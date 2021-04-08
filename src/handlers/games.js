@@ -16,4 +16,9 @@ async function games({ args, message, config }) {
   example: \`\`\`${config.prefix}play ${games[0].tags[0]}\`\`\` invites people to a game of ${games[0].name}`;
 }
 
-module.exports = createHandler(KEY, games, EVENT_TYPE.MESSAGE);
+module.exports = createHandler(
+  KEY,
+  games,
+  EVENT_TYPE.MESSAGE,
+  "Spits out the list of supported games."
+);
