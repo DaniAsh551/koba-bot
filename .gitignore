@@ -3,3 +3,4 @@ node_modules/
 yarn.lock
 .env_dbg
 .env_prd
+*.data.json
