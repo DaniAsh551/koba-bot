@@ -1,6 +1,7 @@
 const fs = require("fs/promises");
 const fsS = require("fs");
 const path = require("path");
+const chokidar = require("chokidar");
 
 /**
  * @description
@@ -33,7 +34,7 @@ class JsonProxy {
   busy = false;
 
   /**
-   * @type {fsS.FSWatcher}
+   * @type {chokidar.FSWatcher}
    */
   watcher;
 
@@ -46,23 +47,14 @@ class JsonProxy {
         fs.writeFile(this.jsonFilePath, "{}");
       })
       .then(() => {
-        //proceed normal operations because file exists
-        this.watcher = fsS.watch(this.jsonFilePath, (eventType, fileName) => {
-          switch (eventType) {
-            case "change": {
-              fs.readFile(fileName, { encoding: "utf-8" }).then((content) => {
-                let update = () => {
-                  if (!this.busy) {
-                    this.busy = true;
-                    this.internalJson = JSON.parse(content);
-                    this._refreshProxy();
-                    this.busy = false;
-                  } else setTimeout(update, 10);
-                };
-              });
-            }
-          }
+        let initContent = fsS.readFileSync(this.jsonFilePath, {
+          encoding: "utf-8",
         });
+        this.internalJson = JSON.parse(initContent);
+
+        //proceed normal operations because file exists
+        this.watcher = chokidar.watch(this.jsonFilePath);
+        this.watcher.on("change", () => this._onContentChange(this));
 
         this._refreshProxy();
 
@@ -90,9 +82,8 @@ class JsonProxy {
    */
   removeListener(id) {
     if (
-      !id ||
       typeof id !== "number" ||
-      isNan(id) ||
+      isNaN(id) ||
       id >= this.changeListeners.length
     ) {
       throw Error("Invalid id");
@@ -117,9 +108,10 @@ class JsonProxy {
   }
 
   _update() {
-    if (this.busy) return;
+    if (this.busy || this.changes.length < 1) return;
 
     this.busy = true;
+    //this.watcher.
     let changes = [...this.changes];
     this.changes = [];
     let json = { ...this.internalJson };
@@ -130,6 +122,22 @@ class JsonProxy {
     this.internalJson = json;
     this._refreshProxy();
     this.busy = false;
+  }
+
+  _onContentChange(jsonProxy) {
+    if (jsonProxy.busy) return;
+    let content = fsS.readFileSync(jsonProxy.jsonFilePath, {
+      encoding: "utf-8",
+    });
+    let update = () => {
+      if (!jsonProxy.busy) {
+        jsonProxy.busy = true;
+        jsonProxy.internalJson = JSON.parse(content);
+        jsonProxy._refreshProxy();
+        jsonProxy.busy = false;
+      } else setTimeout(() => update(), 10);
+    };
+    update();
   }
 
   /**
