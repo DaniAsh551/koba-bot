@@ -19,7 +19,7 @@ class JsonProxy {
   /**
    * @type any
    */
-  internalJson = {};
+  internalJson = null;
 
   /**
    * @type {Proxy}
@@ -38,32 +38,42 @@ class JsonProxy {
    */
   watcher;
 
-  constructor(jsonFilePath) {
+  /**
+   * Creates a new instance of JsonProxy
+   * @param {string} jsonFilePath The json file path on disk. A new file will be created if does not exist, else the existing file and its data will be used.
+   * @param {any} defaultData The initial data to use if the file is being created for the first time.
+   * @param {number} commitInterval The interval to check for changes and committing them to the json file on disk in milliseconds. Defaults to 50.
+   */
+  constructor(jsonFilePath, defaultData = {}, commitInterval = 50) {
     this.jsonFilePath = path.join(process.cwd(), jsonFilePath);
+    this.internalJson = defaultData;
+
+    let _continue = () => {
+      let initContent = fsS.readFileSync(this.jsonFilePath, {
+        encoding: "utf-8",
+      });
+      this.internalJson = JSON.parse(initContent);
+
+      //proceed normal operations because file exists
+      this.watcher = chokidar.watch(this.jsonFilePath);
+      this.watcher.on("change", () => this._onContentChange(this));
+
+      this._refreshProxy();
+
+      setInterval(() => {
+        if (!this.busy && this.changes.length > 0) {
+          this._update();
+        }
+      }, commitInterval);
+    };
 
     //create file if not exists
-    fs.access(this.jsonFilePath)
-      .catch((err) => {
-        fs.writeFile(this.jsonFilePath, "{}");
-      })
-      .then(() => {
-        let initContent = fsS.readFileSync(this.jsonFilePath, {
-          encoding: "utf-8",
-        });
-        this.internalJson = JSON.parse(initContent);
-
-        //proceed normal operations because file exists
-        this.watcher = chokidar.watch(this.jsonFilePath);
-        this.watcher.on("change", () => this._onContentChange(this));
-
-        this._refreshProxy();
-
-        setInterval(() => {
-          if (!this.busy && this.changes.length > 0) {
-            this._update();
-          }
-        }, 50);
-      });
+    if (!fsS.existsSync(this.jsonFilePath)) {
+      fs.writeFile(this.jsonFilePath, JSON.stringify(defaultData));
+      setTimeout(() => _continue(), 10);
+    } else {
+      _continue();
+    }
   }
 
   /**
@@ -99,6 +109,7 @@ class JsonProxy {
           json[prop] = value;
         };
         this.changes.push(change);
+        return true;
       },
       get: (obj, prop) => obj[prop],
     });
@@ -114,7 +125,7 @@ class JsonProxy {
     //this.watcher.
     let changes = [...this.changes];
     this.changes = [];
-    let json = { ...this.internalJson };
+    let json = this.internalJson;
     changes.forEach((change) => change(json));
 
     let jsonString = JSON.stringify(json);
