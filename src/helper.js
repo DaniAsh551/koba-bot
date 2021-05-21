@@ -1,4 +1,4 @@
-const { User } = require("discord.js");
+const { User, Channel } = require("discord.js");
 const jokes = require("./config/jokes.json");
 const playConfig = require("./config/play.json");
 
@@ -65,5 +65,20 @@ function getUserProp(user, prop) {
       return user[prop];
   }
 }
-
 module.exports.getUserProp = getUserProp;
+
+/**
+ * Returns a specified property from channel object
+ * @param {Channel} channel
+ * @param {string} prop
+ */
+function getChannelProp(channel, prop) {
+  switch (prop) {
+    case "mention":
+      return `<#${channel.id}>`;
+    default:
+      return channel[prop];
+  }
+}
+
+module.exports.getChannelProp = getChannelProp;

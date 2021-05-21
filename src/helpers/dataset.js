@@ -28,8 +28,7 @@ class DataSet {
       try {
         while (this.isBusy) {}
         this.isBusy = true;
-        let lastId = this.getData().length > 0 ? this.getData()[0].id : -1;
-        let newId = lastId + 1;
+        let newId = this.getData().length > 0 ? this.getData()[0].id + 1 : 0;
         this.getData().push({ ...record, id: newId });
         this.isBusy = false;
         res(newId);
@@ -76,6 +75,44 @@ class DataSet {
         res(id);
       } catch (error) {
         rej({ error, id });
+      }
+    });
+  }
+
+  /**
+   * Find the first record which matches a given predicate.
+   * @param {(any) => boolean} predicate
+   */
+  find(predicate) {
+    return new Promise((res, rej) => {
+      try {
+        while (this.isBusy) {}
+        this.isBusy = true;
+        let index = this.getData().findIndex(predicate);
+        let record = this.getData()[index];
+        this.isBusy = false;
+        res(record);
+      } catch (error) {
+        rej({ error });
+      }
+    });
+  }
+
+  /**
+   * Find all records which match a given predicate.
+   * @param {(any) => boolean} predicate
+   */
+  findAll(predicate) {
+    return new Promise((res, rej) => {
+      try {
+        while (this.isBusy) {}
+        this.isBusy = true;
+        let index = this.getData().filter(predicate);
+        let records = this.getData()[index];
+        this.isBusy = false;
+        res(records);
+      } catch (error) {
+        rej({ error });
       }
     });
   }
