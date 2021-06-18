@@ -6,7 +6,7 @@ This is a bot by which we aim to eliminate the need for all or most of the other
 ### Structure
 ```
 .                    : Project Root
-├── package.json     : Node package.js file
+├── package.json     : Node package.json file
 ├── src              : Contains all the source code
 │   ├── avatar.png   : Bot avatar
 │   ├── config       : Contains all the configuration JSON files
@@ -32,7 +32,7 @@ Feel free to clone, make changes and submit a pull request, I would then inspect
 - All the rules below must be followed
 
 ##### Handlers
-Handlers are the basics of the bot. Each command is passed into its respective bot.
+Handlers are the basics of the bot. Each command is passed into its respective handler.
 * Handler names should follow the pattern: `[command].js`
 * All handlers must be inside the `src/handlers` directory
 * All handlers must export an object with two properties, they are:
