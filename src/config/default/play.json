@@ -5,11 +5,30 @@
             "tag": "apex legends"
         },
         {
+            "channel": "chat-valo",
+            "tag": "valorant"
+        },
+        {
             "channel": "chat-deceit",
             "tag": "deceit"
         }
     ],
     "games": [
+        {
+            "name": "Valorant",
+            "tags": [
+                "valorant",
+                "valo",
+                "val"
+            ],
+            "role": "<@&752518592322338857>",
+            "channels": {
+                "whitelist": [
+                    "chat-valorant"
+                ],
+                "blacklist": []
+            }
+        },
         {
             "name": "Apex Legends",
             "tags": [
