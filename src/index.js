@@ -2,7 +2,7 @@
 const Discord = require("discord.js");
 const handlers = require("./handlers");
 const { getJoke } = require("./helper");
-const config = require("./config/app.json");
+const { appConfig } = require("./config");
 const { EVENT_TYPE } = require("./createHandler");
 //bot client
 const client = new Discord.Client();
@@ -20,9 +20,12 @@ client.on("ready", () => {
 
   setTimeout(
     () =>
+      //set bot avatar
       client.user.setAvatar(
         require("fs").readFileSync(__dirname + "/avatar.png")
-      ),
+      )
+      //suppress avatar set errors
+      .catch(() => {}),
     5000
   );
 
@@ -51,6 +54,9 @@ client.on("message", async (message) => {
   // It's good practice to ignore other bots. This also makes your bot ignore itself
   // and not get into a spam loop (we call that "botception").
   if (message.author.bot) return;
+
+  let guildId = message.guild.id;
+  let config = appConfig(guildId, "app.json")
 
   // Also good practice to ignore any message that does not start with our prefix,
   // which is set in the configuration file.

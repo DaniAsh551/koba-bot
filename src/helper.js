@@ -1,14 +1,15 @@
 const { User, Channel } = require("discord.js");
-const jokes = require("./config/jokes.json");
-const playConfig = require("./config/play.json");
+const {getConfig} = require("./config");
 
 const userPropRegex = /({user\.([^}]*))(})/gm;
 
 /**
  * Builds a custom play message based on the messages in the config.
- * @param {{ role:string, user:User }}} param0
+ * @param {string} guildId Id of the current guild.
+ * @param {{ role:string, user:User }}} param1
  */
-module.exports.buildPlayMessage = function ({ role, user }) {
+module.exports.buildPlayMessage = function (guildId, { role, user }) {
+  let playConfig = getConfig(guildId, "play.json");
   let message = getRandom(playConfig.messages);
   message = replaceAll(message, "{role}", role);
 
@@ -28,7 +29,7 @@ module.exports.buildPlayMessage = function ({ role, user }) {
 /**
  * Gets a random joke from the config.
  */
-module.exports.getJoke = () => getRandom(jokes);
+module.exports.getJoke = () => getRandom(getConfig("default","jokes.json"));
 
 /**
  * Returns a random element of the given array
