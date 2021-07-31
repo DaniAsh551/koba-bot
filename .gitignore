@@ -1,7 +1,11 @@
 node_modules/
 .env
 yarn.lock
+<<<<<<< HEAD
 .env_dbg
 .env_prd
 *.data.json
 .data/
+=======
+.env*
+>>>>>>> 83af23d7968499ca9f47e46932f80d3e3992c404
