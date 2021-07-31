@@ -1,6 +1,6 @@
 const { Message, Client } = require("discord.js");
 const { buildPlayMessage, getUserProp } = require("../helper");
-const playConfig = require("../config/play.json");
+const { getConfig } = require("../config")
 const KEY = "play";
 const { createHandler, EVENT_TYPE } = require("../createHandler");
 
@@ -11,8 +11,12 @@ const help = () => "Type 'play [game]'\n ex: '/play apex'";
  * @param {{ args:string[], message:Message, config:any, client: Client }} param0
  */
 async function play({ args, message, config, client }) {
+
+  let guildId = message.guild.id;
+
   var requestedGame = args && args[0] && args[0].toLocaleLowerCase();
   let channelName = message.channel.name.toLocaleLowerCase();
+  let playConfig = getConfig(guildId, "play.json");
 
   if (!requestedGame) {
     let gameTagChannel = playConfig["channel-game-tag-relationships"].filter(
@@ -48,7 +52,7 @@ async function play({ args, message, config, client }) {
   }
 
   let role = game.role;
-  let playMessage = buildPlayMessage({ role, user: message.member.user });
+  let playMessage = buildPlayMessage(guildId, { role, user: message.member.user });
 
   if (!playMessage) return help();
 
