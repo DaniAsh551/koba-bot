@@ -19,7 +19,7 @@ async function help({ args, message, config, handlers }) {
       )}, You can use the following command as of now:`
     );
 
-  let fields = Object.keys(handlers).map((key) => ({
+  let fields = Object.keys(handlers).sort().map((key) => ({
     name: `${prefix}${handlers[key].KEY}`,
     value: handlers[key].description,
   }));
