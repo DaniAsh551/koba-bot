@@ -1,3 +1,12 @@
 {
-    "prefix": "/"
+    "prefix": "/",
+    "memberWelcomeMessages": [
+        "Hello {user.mention}, welcome to our humble abode!",
+        "Hola {user.mention}, everyone here is really friendly!"
+    ],
+    "memberExitMessages": [
+        "Oh no! :broken_heart: {user.name} just left the server, we wish them the best though. :sunglasses:"
+    ],
+    "welcomeMessageChannel": "<#712749434949075075>",
+    "exitMessageChannel": "<#712749434949075075>"
 }

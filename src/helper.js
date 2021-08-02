@@ -83,3 +83,4 @@ function getChannelProp(channel, prop) {
 }
 
 module.exports.getChannelProp = getChannelProp;
+module.exports.getRandom = getRandom;
