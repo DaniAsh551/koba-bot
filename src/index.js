@@ -1,8 +1,8 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const handlers = require("./handlers");
-const { getJoke } = require("./helper");
-const { appConfig } = require("./config");
+const { getJoke, getRandom } = require("./helper");
+const { appConfig, getConfig } = require("./config");
 const { EVENT_TYPE } = require("./createHandler");
 //bot client
 const client = new Discord.Client();
@@ -48,7 +48,25 @@ client.on("guildDelete", (guild) => {
   setActivity();
 });
 
-
+//Event type based handlers
+Object.keys(handlers).filter(k => handlers[k].type === EVENT_TYPE.EVENT).forEach(async handlerKey => {
+  try{
+    let handler = handlers[handlerKey];
+    client.on(handlerKey, async args => {
+      try{
+        if (
+          handler.predicate &&
+          !handler.predicate({ args, config, client, handlers })
+        )
+          return;
+  
+        handler[handlerKey]({ args, config, client, handlers });
+      }catch(e){}
+    });
+  }catch(e){
+    console.log(e);
+  }
+});
 
 // This event will run on every single message received, from any channel or DM.
 client.on("message", async (message) => {
