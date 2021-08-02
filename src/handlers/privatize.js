@@ -126,5 +126,6 @@ module.exports = createHandler(
   KEY,
   privatize,
   EVENT_TYPE.MESSAGE,
-  "Locks current voice channel for specified members only."
+  `Locks current voice channel for specified members only.
+   Usage: [Space Seperated List of mentions for allowed members and roles]`
 );

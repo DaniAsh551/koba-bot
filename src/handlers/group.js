@@ -62,5 +62,6 @@ module.exports = createHandler(
   KEY,
   help,
   EVENT_TYPE.MESSAGE,
-  "Groups a given set of messages into specified no of groups. Usage: [noOfGroups] [Space Seperated List]"
+  `Groups a given set of messages into specified no of groups.
+   Usage: [noOfGroups] [Space Seperated List]`
 );
