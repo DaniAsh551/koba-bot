@@ -5,3 +5,6 @@ yarn*
 .env_prd
 *.data.json
 .data/
+src/config/**
+!src/config/default
+!src/config/default/**
