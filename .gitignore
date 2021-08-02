@@ -1,11 +1,7 @@
 node_modules/
 .env
-yarn.lock
-<<<<<<< HEAD
+yarn*
 .env_dbg
 .env_prd
 *.data.json
 .data/
-=======
-.env*
->>>>>>> feat(dev): env switch
