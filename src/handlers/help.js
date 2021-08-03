@@ -19,7 +19,7 @@ async function help({ args, message, config, handlers }) {
       )}, You can use the following command as of now:`
     );
 
-  let fields = Object.keys(handlers).sort().map((key) => ({
+  let fields = Object.keys(handlers).filter(k => handlers[k].type === EVENT_TYPE.MESSAGE).sort().map((key) => ({
     name: `${prefix}${handlers[key].KEY}`,
     value: handlers[key].description,
   }));
