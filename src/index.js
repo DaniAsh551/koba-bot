@@ -52,16 +52,19 @@ client.on("guildDelete", (guild) => {
 Object.keys(handlers).filter(k => handlers[k].type === EVENT_TYPE.EVENT).forEach(async handlerKey => {
   try{
     let handler = handlers[handlerKey];
-    client.on(handlerKey, async args => {
+    client.on(handlerKey, function() {
+      let args = arguments;
       try{
         if (
           handler.predicate &&
-          !handler.predicate({ args, config, client, handlers })
+          !handler.predicate({ args, client, handlers })
         )
           return;
   
-        handler[handlerKey]({ args, config, client, handlers });
-      }catch(e){}
+        handler[handlerKey]({ args, client, handlers });
+      }catch(e){
+        console.log(handlerKey, e);
+      }
     });
   }catch(e){
     console.log(e);
