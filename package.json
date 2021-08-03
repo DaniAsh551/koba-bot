@@ -13,13 +13,6 @@
   "dependencies": {
     "chokidar": "^3.5.1",
     "discord.js": "^12.4.1",
-<<<<<<< HEAD
     "json-data-proxy": "^0.2.2"
-=======
-    "express": "^4.17.1",
-    "jimp": "^0.16.1",
-    "json-data-proxy": "0.2.2",
-    "opencv.js": "^1.2.1"
->>>>>>> feat: json-data-proxy writable configs
   }
 }
