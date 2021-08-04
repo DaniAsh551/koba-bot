@@ -86,16 +86,19 @@ client.on("message", async (message) => {
   }
   let config = appConfig(guildId, "app.json")
 
+  let prefixes = config.additionalPrefixes || [];
+  prefixes.push(config.prefix || "/");
+
   // Also good practice to ignore any message that does not start with our prefix,
   // which is set in the configuration file.
-  if (!message.content.startsWith(config.prefix)) return;
+  if (prefixes.filter(prefix => message.content.startsWith(prefix)).length < 1) return;
 
   // Here we separate our "command" name, and our "arguments" for the command.
   // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
   // command = say
   // args = ["Is", "this", "the", "real", "life?"]
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+  const command = args.shift().toLowerCase().trim();
 
   // Let's go with a few common example commands! Feel free to delete or change those.
   if (handlers[command] && handlers[command].type === EVENT_TYPE.MESSAGE) {

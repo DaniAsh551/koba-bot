@@ -1,5 +1,6 @@
 {
     "prefix": "/",
+    "additionalPrefixes": [],
     "memberWelcomeMessages": [
         "Hello {user.mention}, welcome to our humble abode!",
         "Hola {user.mention}, everyone here is really friendly!"
