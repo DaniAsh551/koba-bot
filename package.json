@@ -12,14 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "chokidar": "^3.5.1",
-<<<<<<< HEAD
     "discord.js": "^12.4.1"
-=======
-    "discord.js": "^12.4.1",
-    "express": "^4.17.1",
-    "jimp": "^0.16.1",
-    "json-data-proxy": "0.2.2",
-    "opencv.js": "^1.2.1"
->>>>>>> d83663c683c980ada497c964851a2375abe2cd76
   }
 }
