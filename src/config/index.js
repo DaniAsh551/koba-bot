@@ -163,4 +163,5 @@ module.exports.appConfig = function(guildId){
 }
 
 module.exports.getConfig =  getConfig;
+module.exports.writableConfig =  writableConfig;
 module.exports.default = getConfig;
