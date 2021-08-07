@@ -1,0 +1,25 @@
+[
+    {
+        "id": "honey-comb",
+        "unitPrecision": "absolute",
+        "size": {
+            "w": 1400,
+            "h": 550
+        },
+        "background": "https://cdn.discordapp.com/attachments/795953711977201704/873074958031548466/hmm.png",
+        "userAvatar": { "shape": "circle", "x": 50, "y": 130, "w": 300, "h": 300 },
+        "userName": null,
+        "userTag": { "x":445, "y": 300, "fontFamily": "Verdana", "fontSize": "45px", "fontColor": "white", "drawType": "fill" },
+        "currentLevel": { "x": 365, "y": 365, "fontSize": "35px", "fontColor": "white", "fontFamily": "Verdana", "drawType": "fill" },
+        "nextLevel": { "x": 1160, "y": 365, "fontSize": "35px", "fontColor": "white", "fontFamily": "Verdana", "drawType": "fill" },
+        "progressBar": { "shape": "circle", "x": 445, "y": 336, "w": 1105, "h": 34, "source": "https://cdn.discordapp.com/attachments/795953711977201704/873112979107876915/rsz_eline.png" },
+        "progressBarText": null,
+        "totalPoints": { "x":600, "y": 200, "fontFamily": "Verdana", "fontSize": "35px", "fontColor": "gray", "drawType": "fill" },
+        "rankText": { "x":445, "y": 200, "fontFamily": "Verdana", "fontSize": "72px", "fontColor": "white", "drawType": "fill" },
+        "guildIcon": { "x": 1180, "y": 100, "w": 160, "h": 160, "shape": "circle" },
+        "preRenderAdditions": [],
+        "postRenderAdditions": [
+            { "x": 49, "y": 129, "w": 297, "h": 296, "source": "https://cdn.discordapp.com/attachments/795953711977201704/873529803582607380/rsz_untitled.png" }
+        ]
+    }
+]
