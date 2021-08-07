@@ -10,6 +10,12 @@
     ],
     "welcomeMessageChannel": "<#712749434949075075>",
     "exitMessageChannel": "<#712749434949075075>",
+    "coinToss": {
+        "toss": "https://cdn.discordapp.com/attachments/795953711977201704/873562644001484820/Coin-Flip-transparent.gif",
+        "heads": "https://www.pngkey.com/png/full/146-1464786_400px-circle-quarter-heads-side-of-coin.png",
+        "tails": "https://www.nicepng.com/png/full/146-1464848_quarter-tail-png-tails-on-a-coin.png",
+        "tossDuration": 1200
+    },
     "levelupBanners": [
         { "startLevel": 0, "banner": "honey-comb" }
     ]
