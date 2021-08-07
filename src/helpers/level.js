@@ -109,7 +109,7 @@ const LVL_MAP = Array.from(Array(500)).map((_,i) => Math.pow(i+1, 2) * 10);
     if(banner.rankText){
       let rank = memberPoints.length < 2 
       ? 1 
-      : (memberPoints.sort((a,b) => a.noOfMsgs - b.noOfMsgs).findIndex(p => p.userId === message.member.user.id) + 1);
+      : (memberPoints.sort((a,b) => b.noOfMsgs - a.noOfMsgs).findIndex(p => p.userId === message.member.user.id) + 1);
       let rankText = `#${rank}`;
       
       drawText(ctx, rankText, banner.rankText);
