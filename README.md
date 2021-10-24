@@ -44,4 +44,4 @@ Handlers are the basics of the bot. Each command is passed into its respective h
     * `config`  : The application wide configuration
 * All handler functions must be asynchronous
 * If you want your handler to simply output a message to the channel where it was invoked on, simply return a string from your handler.
-* If you do not want the handler to output any message or handle outputs yourself (for more control), return null from your handler.
+* If you do not want the handler to output any message or handle outputs yourself (for more control), return `null` from your handler.
