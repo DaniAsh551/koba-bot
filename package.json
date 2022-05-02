@@ -14,7 +14,10 @@
     "chokidar": "^3.5.1",
     "discord.js": "^13.6.0",
     "json-data-proxy": "^0.2.3",
-    "node-canvas": "^2.7.0",
+    "node-canvas": "^2.9.0",
     "timestring": "^6.0.0"
+  },
+  "devDependencies": {
+    "nan": "^2.15.0"
   }
 }
