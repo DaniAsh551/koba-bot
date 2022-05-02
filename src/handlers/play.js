@@ -68,7 +68,11 @@ async function play({ args, message, config, client }) {
   //if requested to play in some time
   if(period) {
     let periodString = period;
-    period = ts(period, 'ms');
+    try{
+      period = ts(period, 'ms');
+    }catch(e){
+      return `Please enter time in hours,minutes and/or seconds.`;
+    }
 
     if(period < 5*60*1000 || period > 5 * 60 * 60 * 1000){// <5minutes || >5hrs
       return "The waiting period needs to be between 5mins and 5 hours.";
