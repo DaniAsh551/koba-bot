@@ -40,7 +40,7 @@ async function level({ args, message, config, handlers }) {
    (banner 
      ? getLevelupAttachment(message, newLvl, userRecord.noOfMsgs, [ ...memberPoints ], banner.banner)
      : getDefaultLevelupAttachment(message, newLvl, userRecord.noOfMsgs)
-   ).then(attachment => message.channel.send(`${getUserProp(message.member.user, "mention")}, here is your level.`, attachment));
+   ).then(attachment => message.reply({conten:`${getUserProp(message.member.user, "mention")}, here is your level.`, files: [attachment]}));
 }
 
 module.exports = createHandler(

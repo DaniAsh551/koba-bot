@@ -5,7 +5,25 @@ const { getJoke, getRandom } = require("./helper");
 const { appConfig, getConfig } = require("./config");
 const { EVENT_TYPE } = require("./createHandler");
 //bot client
-const client = new Discord.Client();
+const intents = Object.keys(Discord.Intents.FLAGS).map(x => Discord.Intents.FLAGS[x]);
+const client = new Discord.Client({intents});
+
+/**
+ * Reply to a message
+ * @param {Discord.Message} message 
+ * @param {string|any} reply
+ * @return {Promise<Discord.Message>}
+ */
+const replyMessage = (message,reply) => {
+  if(typeof(reply) === "string")
+    return message.reply(reply);
+  else
+    return message.reply({
+      embeds: [
+        reply
+      ]
+    });
+};
 
 //set a joke as activity
 const setActivity = () => client.user.setActivity(getJoke());
@@ -116,7 +134,7 @@ client.on("message", async (message) => {
       client,
       handlers,
     });
-    if (!!resp) await message.channel.send(resp);
+    if (!!resp) await replyMessage(message,resp);
   } else {
     let resp = await handlers.help.help({
       args,
@@ -125,7 +143,7 @@ client.on("message", async (message) => {
       client,
       handlers,
     });
-    if (!!resp) await message.channel.send(resp);
+    if (!!resp) await replyMessage(message,resp);
   }
 });
 

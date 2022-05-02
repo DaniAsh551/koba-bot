@@ -4,13 +4,13 @@ const { getUserProp, getRandom } = require("../helper");
 const {getConfig} = require("../config");
 const fs = require("fs");
 const path = require("path");
-const KEY = "message";
+const KEY = "messageCreate";
 
 /**
  * Ghost handler to manage all other message driven events.
  * @param {{ args:Array<Message>, client:Client, handlers:Array<(any) => any>}} param0
  */
-async function message({  args, client, handlers }) {
+async function messageCreate({  args, client, handlers }) {
     
     //get guild config
     let config = getConfig(args[0].channel.guild.id, "app.json");
@@ -31,7 +31,7 @@ async function message({  args, client, handlers }) {
 
 module.exports = createHandler(
   KEY,
-  message,
+  messageCreate,
   EVENT_TYPE.EVENT,
   "Ghost handler to manage all other message driven events."
 );

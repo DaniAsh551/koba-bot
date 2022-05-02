@@ -1,10 +1,14 @@
-const { Message, Client } = require("discord.js");
+const ts = require('timestring');
+
+const { Message, Client, ReplyMessageOptions } = require("discord.js");
 const { buildPlayMessage, getUserProp } = require("../helper");
 const { getConfig } = require("../config")
 const KEY = "play";
 const { createHandler, EVENT_TYPE } = require("../createHandler");
 
-const help = () => "Type 'play [game]'\n ex: '/play apex'";
+const help = () => `Type 'play [game]'
+    OR
+  play in [time]`;
 
 /**
  * Serves the play command on the server
@@ -14,11 +18,22 @@ async function play({ args, message, config, client }) {
 
   let guildId = message.guild.id;
 
-  var requestedGame = args && args[0] && args[0].toLocaleLowerCase();
+  let requestedGame = args && args[0] && args[0].toLocaleLowerCase();
+  let period = requestedGame == 'in' ? args.slice(1).join(" ") : null;
+
+  const replyPlayMessage = (message, requestedGame) => {
+    let role = game.role;
+    let playMessage = buildPlayMessage(guildId, { role, user: message.member.user });
+
+    if (!playMessage) return help();
+
+    return playMessage;
+  };
+
   let channelName = message.channel.name.toLocaleLowerCase();
   let playConfig = getConfig(guildId, "play.json");
 
-  if (!requestedGame) {
+  if (!requestedGame || requestedGame == "in") {
     let gameTagChannel = playConfig["channel-game-tag-relationships"].filter(
       (x) => x.channel === channelName
     );
@@ -26,7 +41,6 @@ async function play({ args, message, config, client }) {
     if (gameTagChannel.length < 1) return help();
 
     requestedGame = gameTagChannel[0].tag;
-    console.log(channelName, requestedGame);
   }
 
   let game = playConfig.games.filter((game) =>
@@ -51,12 +65,23 @@ async function play({ args, message, config, client }) {
       )}, you cannot use this command here.`;
   }
 
-  let role = game.role;
-  let playMessage = buildPlayMessage(guildId, { role, user: message.member.user });
+  //if requested to play in some time
+  if(period) {
+    let periodString = period;
+    period = ts(period, 'ms');
 
-  if (!playMessage) return help();
+    if(period < 5*60*1000 || period > 5 * 60 * 60 * 1000){// <5minutes || >5hrs
+      return "The waiting period needs to be between 5mins and 5 hours.";
+    }
 
-  return playMessage;
+    setTimeout(() => {
+      message.reply(replyPlayMessage(message, requestedGame));
+    }, period);
+
+    return `Okay ${getUserProp(message.member.user, "mention")}! I'll ping in ${periodString}!`;
+  }else{
+    return replyPlayMessage(message, requestedGame);
+  }
 }
 
 module.exports = createHandler(

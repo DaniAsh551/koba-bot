@@ -34,7 +34,7 @@ async function toss({ args, message, config, handlers }) {
         ? new MessageAttachment(aHeads)
         : !isHeads && aTails ? new MessageAttachment(aTails) : null;
 
-      message.channel.send( isHeads ? heads : tails, attachment);
+      message.reply( {content:isHeads ? heads : tails, files: [attachment]});
     }, Math.max(200, duration - 1000));
 
     message.channel.send(toss, tossA).then(m => {
@@ -45,7 +45,7 @@ async function toss({ args, message, config, handlers }) {
     .catch(e => {});
   }else{
     let isHeads = Math.random() >= 0.5;
-    message.channel.send( isHeads ? heads : tails);
+    message.reply({content:isHeads ? heads : tails});
   }
 }
 
