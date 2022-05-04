@@ -9,8 +9,8 @@ const { getDefaultLevelupAttachment, getLevelupAttachment, getLevel } = require(
  */
 module.exports = async function({ message, config }){
 
-    //ignore bots
-    if(message.member.user.bot)
+    //ignore bots and webhooks
+    if(!message || !message.member || !message.member.user || message.member.user.bot)
         return;
 
     let userId = message.member.user.id;
@@ -55,11 +55,4 @@ module.exports = async function({ message, config }){
       : getDefaultLevelupAttachment(message, newLvl, userRecord.noOfMsgs)
     ).then(attachment => message.channel.send(`Congratulations ${getUserProp(message.member.user, "mention")}! You are now level ${newLvl}`, attachment));
     
-    // let attachment = banner 
-    //   ? await getLevelupAttachment(message, newLvl, userRecord.noOfMsgs, [ ...memberPoints ], banner.banner)
-    //   : await getDefaultLevelupAttachment(message, newLvl, userRecord.noOfMsgs);
-
-    // message.channel.send(`Congratulations ${getUserProp(message.member.user, "mention")}! You are now level ${newLvl}`, attachment);
 };
-
-//helper-functions below
