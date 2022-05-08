@@ -1,6 +1,6 @@
 {
   "name": "kb-bot",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Koba Bois discord bot",
   "main": "src/index.js",
   "scripts": {
@@ -11,13 +11,11 @@
   "author": "d4n1551",
   "license": "ISC",
   "dependencies": {
-    "chokidar": "^3.5.1",
+    "chokidar": "^3.5.3",
     "discord.js": "^13.6.0",
     "json-data-proxy": "^0.2.3",
-    "node-canvas": "^2.9.0",
+    "canvas": "^2.9.1",
+    "simple-get": "^4.0.1",
     "timestring": "^6.0.0"
-  },
-  "devDependencies": {
-    "nan": "^2.15.0"
   }
 }

@@ -74,8 +74,8 @@ async function play({ args, message, config, client }) {
       return `Please enter time in hours,minutes and/or seconds.`;
     }
 
-    if(period < 5*60*1000 || period > 5 * 60 * 60 * 1000){// <5minutes || >5hrs
-      return "The waiting period needs to be between 5mins and 5 hours.";
+    if(period < 5*60*1000 || period > 24 * 60 * 60 * 1000){// <5minutes || >5hrs
+      return "The waiting period needs to be between 5 mins and 24 hrs.";
     }
 
     setTimeout(() => {

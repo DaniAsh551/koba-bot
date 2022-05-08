@@ -1,5 +1,5 @@
 const { Message, MessageAttachment, Guild } = require("discord.js");
-const { Canvas, CanvasRenderingContext2D,loadImage } = require("node-canvas");
+const { Canvas, CanvasRenderingContext2D, loadImage } = require("canvas");
 const { getConfig } = require("../config");
 const Colors = require("../colors.json");
 const path = require("path");
